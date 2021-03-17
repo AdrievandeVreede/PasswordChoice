@@ -55,8 +55,11 @@ def handleChoice(choice):
         elif int(ask) == 2:
             name = input("How did you safe the password? ")
             password = getPassword(name)
-            safeToClipboard(password)
-            print("Password is: " + password + " and is copied to clipboard\n")
+            if password != "Password not found":
+                safeToClipboard(password)
+                print("Password is: " + password + " and is copied to clipboard\n")
+            else:
+                print("Not found\n")
         else:
             print("Something wrong\n")
 
@@ -105,6 +108,7 @@ def generatePassword():
             password += rand.choice(letters)
         else:
             password += rand.choice(letters[0:26])
+    password += "!"
     return password
 
 
