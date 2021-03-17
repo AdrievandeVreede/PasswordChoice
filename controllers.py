@@ -50,6 +50,7 @@ def handleChoice(choice):
                             break
                         else:
                             print("Wrong password")
+                    break
 
         elif int(ask) == 2:
             name = input("How did you safe the password? ")
