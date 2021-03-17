@@ -47,27 +47,27 @@ def handleChoice(choice):
             print("Something wrong\n")
 
     elif choice == 3:
-        ask = input("1) Only copy to clipboard, or 2) Safe the password and copy to clipboard?")
+        ask = input("1) Only copy to clipboard, or 2) Safe the password and copy to clipboard?\n")
         if int(ask) == 1:
             password = generatePassword()
             safeToClipboard(password)
             print("Copied to clipboard: " + password)
         elif int(ask) == 2:
             while True:
-                name = input("What name do you label the password?")
+                name = input("What name do you label the password? ")
                 error = checkIfNameExist(name)
                 if error == 500:
-                    print("Already existing password")
+                    print("Already existing password\n")
                 else:
                     password = generatePassword()
                     safePasswordToDatabase([name, password])
                     safeToClipboard(password)
-                    print(password + " is saved with label '" + name + "'")
+                    print(password + " is saved with label '" + name + "'\n")
                     break
         else:
-            print("Something wrong")
+            print("Something wrong\n")
     else:
-        print("Something wrong")
+        print("Something wrong\n")
 
 
 def generatePassword():
