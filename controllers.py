@@ -163,6 +163,6 @@ def getAllLabels():
 
 def tryOpenFile():
     try:
-        file = open("passwords.txt", "r")
+        open("passwords.txt", "r")
     except IOError:
-        file = open("passwords.txt", "x")
+        open("passwords.txt", "x")
