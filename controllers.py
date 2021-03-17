@@ -4,7 +4,7 @@ import base64 as b
 
 
 def askForChoice():
-    print("Input is always the number before the option\n\n")
+    print("Input is always the number before the option\n")
     choice = input("What do you want: \n1) safe a password from clipboard \n2) get a password \n3) create a "
                    "password \n")
     while True:
@@ -30,14 +30,27 @@ def handleChoice(choice):
                 password = p.paste()
                 ask = input("Sure to safe this password: " + password + " ? Y/N")
                 safePasswordToDatabase([name, password]) if ask == ("Y" or "y" or "Yes" or "yes") else print("Not "
-                                                                                                              "saved")
+                                                                                                             "saved")
                 print(password + " is saved with label '" + name + "'\n")
                 break
 
     elif choice == 2:
         ask = input("Choice: 1) Get all labels, 2) Get password\n")
         if int(ask) == 1:
-            getAllLabels()
+            while True:
+                password = getPassword("wwdoc")
+                if password == "Password not found":
+                    ask = input("There is no password found, you need to set one. Give new password: ")
+                    safePasswordToDatabase(["wwdoc", ask])
+                else:
+                    while ask != password:
+                        ask = input("Password: ")
+                        if ask == password:
+                            getAllLabels()
+                            break
+                        else:
+                            print("Wrong password")
+
         elif int(ask) == 2:
             name = input("How did you safe the password? ")
             password = getPassword(name)
@@ -144,5 +157,11 @@ def getAllLabels():
     file = open("passwords.txt", "r")
     for line in file:
         x = line.split("|")
-        print(x[0])
+        print(x[0]) if x[0] != "wwdoc" else None
 
+
+def tryOpenFile():
+    try:
+        file = open("passwords.txt", "r")
+    except IOError:
+        file = open("passwords.txt", "x")
