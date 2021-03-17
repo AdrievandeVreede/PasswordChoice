@@ -66,7 +66,11 @@ def handleChoice(choice):
     elif choice == 3:
         ask = input("1) Only copy to clipboard, or 2) Safe the password and copy to clipboard?\n")
         if int(ask) == 1:
-            password = generatePassword()
+            ask = input("Complicated or not? Y/N")
+            if ask == "Y":
+                password = generatePassword(1)
+            else:
+                password = generatePassword(0)
             safeToClipboard(password)
             print("Copied to clipboard: " + password)
         elif int(ask) == 2:
@@ -87,7 +91,7 @@ def handleChoice(choice):
         print("Something wrong\n")
 
 
-def generatePassword():
+def generatePassword(add):
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
     password = ""
     x = rand.randint(1, 3)
@@ -108,7 +112,7 @@ def generatePassword():
             password += rand.choice(letters)
         else:
             password += rand.choice(letters[0:26])
-    password += "!"
+    password += "!" if add == 1 else None
     return password
 
 
