@@ -12,7 +12,7 @@ def askForChoice():
             break
         handleChoice(int(choice))
         choice = input("What do you want: 1) safe a password from clipboard, 2) get a password, 3) create a "
-                       "password, 4) break?")
+                       "password, 4) break?\n")
 
 
 def securePassword(password):
@@ -22,16 +22,16 @@ def securePassword(password):
 def handleChoice(choice):
     if choice == 1:
         while True:
-            name = input("What name do you label the password?")
+            name = input("What name do you label the password?\n")
             error = checkIfNameExist(name)
             if error == 500:
-                print("Already existing password")
+                print("Already existing password\n")
             else:
                 password = p.paste()
                 ask = input("Sure to safe this password: " + password + " ? Y/N")
                 safePasswordToDatabase([name, password]) if ask == ("Y" or "y" or "Yes" or "yes") else print("Not "
                                                                                                               "saved")
-                print(password + " is saved with label '" + name + "'")
+                print(password + " is saved with label '" + name + "'\n")
                 break
 
     elif choice == 2:
@@ -39,12 +39,12 @@ def handleChoice(choice):
         if int(ask) == 1:
             getAllLabels()
         elif int(ask) == 2:
-            name = input("How did you safe the password?")
+            name = input("How did you safe the password? ")
             password = getPassword(name)
             safeToClipboard(password)
-            print("Password is: " + password + " and is copied to clipboard")
+            print("Password is: " + password + " and is copied to clipboard\n")
         else:
-            print("Something wrong")
+            print("Something wrong\n")
 
     elif choice == 3:
         ask = input("1) Only copy to clipboard, or 2) Safe the password and copy to clipboard?")
@@ -73,14 +73,24 @@ def handleChoice(choice):
 def generatePassword():
     letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
     password = ""
+    x = rand.randint(1, 3)
     for i in range(6):
-        password += rand.choice(letters[0:26])
+        if x == 1:
+            password += rand.choice(letters)
+        else:
+            password += rand.choice(letters[0:26])
     password += "-"
     for i in range(6):
-        password += rand.choice(letters[0:26])
+        if x == 2:
+            password += rand.choice(letters)
+        else:
+            password += rand.choice(letters[0:26])
     password += "-"
     for i in range(6):
-        password += rand.choice(letters)
+        if x == 3:
+            password += rand.choice(letters)
+        else:
+            password += rand.choice(letters[0:26])
     return password
 
 
