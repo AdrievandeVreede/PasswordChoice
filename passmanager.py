@@ -7,11 +7,11 @@ import os
 def askForChoice():
     print("Input is always the number before the option\n")
     choice = input("What do you want:\n1) safe a password from clipboard\n2) get a password\n3) create a "
-                   "password\n4) settings\n")
+                   "password\n4) settings (not working)\n")
     while True:
         handleChoice(choice)
         choice = input("What do you want: 1) safe a password from clipboard, 2) get a password, 3) create a "
-                       "password, 4) settings, 5) break?\n")
+                       "password, 4) settings (not working), 5) break?\n")
 
 
 def handleChoice(choice):
