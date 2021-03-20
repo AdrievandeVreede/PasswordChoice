@@ -166,9 +166,10 @@ def getPassword(name):
     file = open("data/passwords.txt", "r")
     for line in file:
         x = line.split("|", 2)
-        if (name == x[1]) and (user_name == (x[0] or "admin")):
-            password = decodePassword(x[2])
-            break
+        if (user_name == x[0]) or (user_name == "admin"):
+            if name == x[1]:
+                password = decodePassword(x[2])
+        break
     return password
 
 
